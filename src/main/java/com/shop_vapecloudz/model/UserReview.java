@@ -11,14 +11,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemHasCategory {
+public class UserReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "item_id", referencedColumnName = "id")
-    private Item item;
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    private User user;
     @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private Category category;
+    @JoinColumn(name = "item_id",referencedColumnName = "id")
+    private Item item;
+    private Byte rating;
+    @Column(columnDefinition = "varchar(1000)")
+    private String content;
 }

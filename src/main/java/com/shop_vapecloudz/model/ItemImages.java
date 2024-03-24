@@ -11,10 +11,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class ItemImages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(columnDefinition = "varchar(10)")
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "item_id", referencedColumnName = "id")
+    private Item item;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isThumbnail;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isDeleted;
 }

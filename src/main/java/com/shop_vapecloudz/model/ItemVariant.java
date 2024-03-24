@@ -11,10 +11,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class ItemVariant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(columnDefinition = "varchar(10)")
+    @ManyToOne
+    @JoinColumn(name = "item_id",referencedColumnName = "id")
+    private Item item;
     private String name;
+    private Integer price;
 }

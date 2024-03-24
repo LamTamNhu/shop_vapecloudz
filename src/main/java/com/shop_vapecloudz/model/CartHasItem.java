@@ -21,4 +21,5 @@ public class CartHasItem {
     @ManyToOne
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     private Item item;
+    private Integer itemAmount;
 }
