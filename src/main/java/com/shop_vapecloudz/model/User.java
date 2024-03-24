@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -15,18 +17,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String profilePicture;
     @Column(columnDefinition = "varchar(50)")
-    private String name;
+    private String userName;
+    private LocalDate birthday;
     @Column(columnDefinition = "varchar(50)")
     private String email;
-    @Column(columnDefinition = "varchar(10)")
-    private String phoneNumber;
     @Column(columnDefinition = "varchar(50)")
     private String password;
-    @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
-    private Role role;
     @Column(columnDefinition = "boolean default false")
     private Boolean isDeleted;
 }

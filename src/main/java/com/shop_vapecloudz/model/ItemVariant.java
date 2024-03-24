@@ -18,6 +18,11 @@ public class ItemVariant {
     @ManyToOne
     @JoinColumn(name = "item_id",referencedColumnName = "id")
     private Item item;
+    @Column(columnDefinition = "varchar(100)")
     private String name;
     private Integer price;
+    private Integer stock;
+    @OneToOne
+    @JoinColumn(name = "item_image_id",referencedColumnName = "id")
+    private ItemImage itemImage;
 }

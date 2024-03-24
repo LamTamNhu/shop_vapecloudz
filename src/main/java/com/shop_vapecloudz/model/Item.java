@@ -20,6 +20,9 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
+    @OneToOne
+    @JoinColumn(name = "item_image_id",referencedColumnName = "id")
+    private ItemImage itemImage;
     @Column(columnDefinition = "varchar(2000)")
     private String description;
     @Column(columnDefinition = "boolean default false")

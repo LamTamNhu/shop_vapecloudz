@@ -11,15 +11,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartHasItem {
+public class UserCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "cart_id", referencedColumnName = "id")
-    private Cart cart;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
     @ManyToOne
-    @JoinColumn(name = "item_id", referencedColumnName = "id")
-    private Item item;
+    @JoinColumn(name = "item_variant_id", referencedColumnName = "id")
+    private ItemVariant itemVariant;
     private Integer itemAmount;
 }

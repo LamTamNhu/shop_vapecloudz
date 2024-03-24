@@ -11,10 +11,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class ItemImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(columnDefinition = "varchar(10)")
-    private String name;
+    private String url;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isDeleted;
 }

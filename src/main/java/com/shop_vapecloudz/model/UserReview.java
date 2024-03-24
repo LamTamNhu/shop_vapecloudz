@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -24,4 +26,5 @@ public class UserReview {
     private Byte rating;
     @Column(columnDefinition = "varchar(1000)")
     private String content;
+    private LocalDate postTime;
 }
