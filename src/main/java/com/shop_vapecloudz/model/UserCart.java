@@ -17,7 +17,7 @@ public class UserCart {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    private UserEntity userEntity;
     @ManyToOne
     @JoinColumn(name = "item_variant_id", referencedColumnName = "id")
     private ItemVariant itemVariant;

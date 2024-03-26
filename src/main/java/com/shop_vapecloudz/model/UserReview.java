@@ -19,7 +19,7 @@ public class UserReview {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id")
-    private User user;
+    private UserEntity userEntity;
     @ManyToOne
     @JoinColumn(name = "item_id",referencedColumnName = "id")
     private Item item;

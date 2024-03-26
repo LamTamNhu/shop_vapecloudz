@@ -1,29 +1,28 @@
 package com.shop_vapecloudz.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class User {
+@NoArgsConstructor
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(columnDefinition = "varchar(50)")
-    private String userName;
+    private String username;
     private LocalDate birthday;
     @Column(columnDefinition = "varchar(50)")
     private String email;
-    @Column(columnDefinition = "varchar(50)")
     private String password;
     @Column(columnDefinition = "boolean default false")
     private Boolean isDeleted;
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
 }
