@@ -1,8 +1,11 @@
 package com.shop_vapecloudz.model.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
     private String username;
     private String password;

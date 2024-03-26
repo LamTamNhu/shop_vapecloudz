@@ -1,8 +1,10 @@
 package com.shop_vapecloudz.controller;
 
+import com.shop_vapecloudz.config.JWTTokenHandler;
 import com.shop_vapecloudz.model.Role;
-import com.shop_vapecloudz.model.dto.UserDTO;
 import com.shop_vapecloudz.model.UserEntity;
+import com.shop_vapecloudz.model.dto.AuthResponseDTO;
+import com.shop_vapecloudz.model.dto.UserDTO;
 import com.shop_vapecloudz.service.IAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,19 +23,22 @@ public class AuthRestController {
     private final IAuthService authService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final JWTTokenHandler jwtTokenHandler;
 
     @Autowired
-    public AuthRestController(IAuthService authService, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
+    public AuthRestController(IAuthService authService, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JWTTokenHandler jwtTokenHandler) {
         this.authService = authService;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
+        this.jwtTokenHandler = jwtTokenHandler;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<AuthResponseDTO> login(@RequestBody UserDTO userDTO) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>(HttpStatus.OK);
+        String token = jwtTokenHandler.generateToken(authentication);
+        return new ResponseEntity<>(new AuthResponseDTO(token), HttpStatus.OK);
     }
 
     @PostMapping("/register")
