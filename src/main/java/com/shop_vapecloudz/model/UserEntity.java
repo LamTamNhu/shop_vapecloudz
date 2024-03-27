@@ -21,7 +21,7 @@ public class UserEntity {
     private String email;
     private String password;
     @Column(columnDefinition = "boolean default false")
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;

@@ -26,5 +26,5 @@ public class Item {
     @Column(columnDefinition = "varchar(2000)")
     private String description;
     @Column(columnDefinition = "boolean default false")
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 }

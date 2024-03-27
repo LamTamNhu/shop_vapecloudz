@@ -2,6 +2,8 @@ package com.shop_vapecloudz.config;
 
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +12,7 @@ import java.util.Date;
 
 @Service
 public class JWTTokenHandler {
-    SecretKey key = Jwts.SIG.HS256.key().build();
+        SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(SecurityConstant.JWT_SECRET));
 
     public String generateToken(Authentication authentication) {
         String username = authentication.getName();

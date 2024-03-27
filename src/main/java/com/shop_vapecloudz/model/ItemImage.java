@@ -17,5 +17,5 @@ public class ItemImage {
     private Long id;
     private String url;
     @Column(columnDefinition = "boolean default false")
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 }
