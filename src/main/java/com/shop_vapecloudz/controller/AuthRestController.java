@@ -35,19 +35,23 @@ public class AuthRestController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDTO> login(@RequestBody UserDTO userDTO) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDTO.getEmail(), userDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtTokenHandler.generateToken(authentication);
-        return new ResponseEntity<>(new AuthResponseDTO(token), HttpStatus.OK);
+        AuthResponseDTO authResponseDTO = new AuthResponseDTO();
+        authResponseDTO.setAccessToken(token);
+        authResponseDTO.setUsername(authentication.getName());
+        authResponseDTO.setRole(authentication.getAuthorities().toString());
+        return new ResponseEntity<>(authResponseDTO, HttpStatus.OK);
     }
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody UserDTO userDTO) {
-        if (authService.checkUserExistByUsername(userDTO.getUsername())) {
+        if (authService.checkUserExistByEmail(userDTO.getEmail())) {
             return new ResponseEntity<>("Username already taken", HttpStatus.BAD_REQUEST);
         }
         UserEntity user = new UserEntity();
-        user.setUsername(userDTO.getUsername());
+        user.setUsername(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         Role userRole = new Role();
         userRole.setId(2L);

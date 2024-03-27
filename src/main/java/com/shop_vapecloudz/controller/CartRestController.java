@@ -11,8 +11,5 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RequestMapping("api/customer/cart")
 public class CartRestController {
-    @GetMapping("/test")
-    public ResponseEntity<Void> test() {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+
 }

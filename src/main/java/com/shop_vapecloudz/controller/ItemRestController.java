@@ -11,8 +11,5 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RequestMapping("api/admin/item")
 public class ItemRestController {
-    @GetMapping("/test")
-    public ResponseEntity<String> test() {
-        return new ResponseEntity<>("OK", HttpStatus.OK);
-    }
+
 }

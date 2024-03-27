@@ -11,9 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AuthResponseDTO {
     private String accessToken;
-    private String tokenType = "Bearer";
-
-    public AuthResponseDTO(String accessToken) {
-        this.accessToken = accessToken;
-    }
+    private String username;
+    private String role;
 }

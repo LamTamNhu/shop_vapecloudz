@@ -15,13 +15,13 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public UserEntity findByUsername(String username) {
-        return userRepository.findByUsername(username).orElse(null);
+    public UserEntity findByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
     }
 
     @Override
-    public boolean checkUserExistByUsername(String username) {
-        return userRepository.existsByUsername(username);
+    public boolean checkUserExistByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 
     @Override

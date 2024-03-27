@@ -3,9 +3,9 @@ package com.shop_vapecloudz.service;
 import com.shop_vapecloudz.model.UserEntity;
 
 public interface IAuthService {
-    UserEntity findByUsername(String username);
+    UserEntity findByEmail(String username);
 
-    boolean checkUserExistByUsername(String username);
+    boolean checkUserExistByEmail(String username);
 
     void saveUser(UserEntity user);
 }
