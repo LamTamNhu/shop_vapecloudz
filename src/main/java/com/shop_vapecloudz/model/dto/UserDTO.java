@@ -9,4 +9,6 @@ import lombok.*;
 public class UserDTO {
     private String email;
     private String password;
+    private String username;
+    private String birthday;
 }
