@@ -9,16 +9,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Role {
+@AllArgsConstructor
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(columnDefinition = "varchar(20)")
+    @Column(columnDefinition = "varchar(50)")
     private String name;
-
-    public Role(Long id) {
-        this.id = id;
-    }
 }

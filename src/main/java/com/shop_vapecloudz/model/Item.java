@@ -15,15 +15,18 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(columnDefinition = "varchar(100)")
+    @Column(columnDefinition = "varchar(200)")
     private String name;
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
+    @ManyToOne
+    @JoinColumn(name = "brand_id", referencedColumnName = "id")
+    private Brand brand;
     @OneToOne
     @JoinColumn(name = "item_image_id",referencedColumnName = "id")
     private ItemImage itemImage;
-    @Column(columnDefinition = "varchar(2000)")
+    @Column(columnDefinition = "TEXT")
     private String description;
     @Column(columnDefinition = "boolean default false")
     private Boolean isDeleted = false;

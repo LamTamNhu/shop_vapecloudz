@@ -6,6 +6,7 @@ import com.shop_vapecloudz.model.UserEntity;
 import com.shop_vapecloudz.model.dto.AuthResponseDTO;
 import com.shop_vapecloudz.model.dto.UserDTO;
 import com.shop_vapecloudz.service.IAuthService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @RestController
 @CrossOrigin
@@ -47,16 +50,18 @@ public class AuthRestController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody UserDTO userDTO) {
-        if (authService.checkUserExistByEmail(userDTO.getEmail())) {
-            return new ResponseEntity<>("Username already taken", HttpStatus.BAD_REQUEST);
-        }
         UserEntity user = new UserEntity();
-        user.setUsername(userDTO.getEmail());
+        BeanUtils.copyProperties(userDTO, user);
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        Role userRole = new Role();
-        userRole.setId(2L);
-        user.setRole(userRole);
+        user.setRole(new Role(2L));
+        user.setBirthday(LocalDate.parse(userDTO.getBirthday()));
         authService.saveUser(user);
         return new ResponseEntity<>("New account registered success!", HttpStatus.OK);
+    }
+
+    @GetMapping("/duplicated")
+    public ResponseEntity<Boolean> checkEmailDuplicated(@RequestParam("email") String email) {
+        Boolean isDuplicated = authService.checkUserExistByEmail(email);
+        return new ResponseEntity<>(isDuplicated, HttpStatus.OK);
     }
 }
