@@ -43,8 +43,9 @@ public class AuthRestController {
         String token = jwtTokenHandler.generateToken(authentication);
         AuthResponseDTO authResponseDTO = new AuthResponseDTO();
         authResponseDTO.setAccessToken(token);
-        authResponseDTO.setUsername(authentication.getName());
+        authResponseDTO.setUsername(userDTO.getUsername());
         authResponseDTO.setRole(authentication.getAuthorities().toString());
+        authResponseDTO.setEmail(userDTO.getEmail());
         return new ResponseEntity<>(authResponseDTO, HttpStatus.OK);
     }
 

@@ -9,9 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthResponseDTO {
-    private String accessToken;
-    private String username;
-    private String role;
+public class CartAddDTO {
+    private Long id;
     private String email;
 }

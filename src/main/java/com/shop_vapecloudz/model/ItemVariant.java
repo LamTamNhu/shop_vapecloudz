@@ -22,7 +22,7 @@ public class ItemVariant {
     private String name;
     private Integer price;
     private Integer stock;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "item_image_id",referencedColumnName = "id")
     private ItemImage itemImage;
 }
