@@ -4,16 +4,18 @@ import com.shop_vapecloudz.model.Item;
 import com.shop_vapecloudz.model.ItemVariant;
 import com.shop_vapecloudz.model.UserCart;
 import com.shop_vapecloudz.model.UserEntity;
-import com.shop_vapecloudz.model.dto.CartAddDTO;
-import com.shop_vapecloudz.model.dto.IItemDTO;
+import com.shop_vapecloudz.model.dto.*;
 import com.shop_vapecloudz.repository.ItemRepository;
 import com.shop_vapecloudz.repository.ItemVariantRepository;
 import com.shop_vapecloudz.repository.UserCartRepository;
 import com.shop_vapecloudz.repository.UserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ItemService implements IItemService {
@@ -52,7 +54,18 @@ public class ItemService implements IItemService {
     }
 
     @Override
-    public Item findById(Long id) {
-        return itemRepository.findById(id).orElse(null);
+    public ItemDetailDTO findItemDetailById(Long id) {
+        ItemDetailDTO itemDetailDTO = new ItemDetailDTO();
+        Item item = itemRepository.findById(id).orElse(null);
+        if (item == null) {
+            return null;
+        }
+        ItemDTO itemDTO = new ItemDTO();
+        BeanUtils.copyProperties(item, itemDTO);
+        itemDTO.setImageUrl(item.getItemImage().getUrl());
+        itemDetailDTO.setItemDTO(itemDTO);
+        List<IItemVariantDTO> itemVariantDTOS = itemVariantRepository.findAllByItem_Id(id);
+        itemDetailDTO.setItemVariantDTOS(itemVariantDTOS);
+        return itemDetailDTO;
     }
 }

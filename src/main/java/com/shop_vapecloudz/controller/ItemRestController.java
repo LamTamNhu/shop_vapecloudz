@@ -2,8 +2,10 @@ package com.shop_vapecloudz.controller;
 
 import com.shop_vapecloudz.model.Item;
 import com.shop_vapecloudz.model.dto.IItemDTO;
+import com.shop_vapecloudz.model.dto.ItemDetailDTO;
 import com.shop_vapecloudz.repository.ItemRepository;
 import com.shop_vapecloudz.service.IItemService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,8 +36,8 @@ public class ItemRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Item> findItemById(@PathVariable Long id) {
-        Item item = itemService.findById(id);
+    public ResponseEntity<ItemDetailDTO> getItemDetails(@PathVariable Long id) {
+        ItemDetailDTO item = itemService.findItemDetailById(id);
         if (item == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

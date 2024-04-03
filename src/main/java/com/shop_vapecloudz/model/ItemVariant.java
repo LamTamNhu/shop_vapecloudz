@@ -20,7 +20,7 @@ public class ItemVariant {
     private Item item;
     @Column(columnDefinition = "varchar(100)")
     private String name;
-    private Integer price;
+    private Double price;
     private Integer stock;
     @ManyToOne
     @JoinColumn(name = "item_image_id",referencedColumnName = "id")

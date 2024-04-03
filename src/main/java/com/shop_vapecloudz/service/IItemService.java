@@ -3,6 +3,7 @@ package com.shop_vapecloudz.service;
 import com.shop_vapecloudz.model.Item;
 import com.shop_vapecloudz.model.dto.CartAddDTO;
 import com.shop_vapecloudz.model.dto.IItemDTO;
+import com.shop_vapecloudz.model.dto.ItemDetailDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -11,5 +12,5 @@ public interface IItemService {
 
     void addToCartByUserEmail(CartAddDTO cartAddDTO);
 
-    Item findById(Long id);
+    ItemDetailDTO findItemDetailById(Long id);
 }

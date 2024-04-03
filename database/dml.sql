@@ -186,3 +186,48 @@ What\'s included?
 The Thallo S is powered by a built-in 1000mAh battery and features adjustable wattage up to 80W. The Thallo S Pod supports both RPM 2 coils and RPM coils, giving you plenty of options for customization.
 
 Available in a range of stylish colors, the SMOK Thallo S Kit is perfect for vapers who want a powerful and stylish device.', 'SMOK Thallo S Kit');
+
+
+-- Item 1
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Black', 29.99, 99, 1, 1);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Silver', 29.99, 99, 1, 2);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Blue', 29.99, 99, 1, 3);
+
+-- Item 2
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Red', 34.99, 75, 2, 4);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Green', 34.99, 75, 2, 5);
+
+-- Item 3
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Stainless Steel', 39.99, 50, 3, 6);
+
+-- Item 4
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Gold', 44.99, 60, 4, 7);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Rose Gold', 44.99, 60, 4, 8);
+
+-- Item 5
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Matte Black', 49.99, 80, 5, 9);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Gunmetal', 49.99, 80, 5, 10);
+-- Item 6
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('White', 24.99, 100, 6, 11);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Yellow', 24.99, 100, 6, 12);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Orange', 24.99, 100, 6, 13);
+
+-- Item 7
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Purple', 39.99, 85, 7, 14);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Pink', 39.99, 85, 7, 15);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Teal', 39.99, 85, 7, 16);
+
+-- Item 8
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Rainbow', 49.99, 70, 8, 17);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Chrome', 49.99, 70, 8, 18);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Brushed Metal', 49.99, 70, 8, 19);
+
+-- Item 9
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Carbon Fiber', 54.99, 65, 9, 20);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Wood Grain', 54.99, 65, 9, 21);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Leather', 54.99, 65, 9, 22);
+
+-- Item 10
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Clear', 29.99, 95, 10, 23);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Frosted', 29.99, 95, 10, 24);
+INSERT INTO vape_shop.item_variant (name, price, stock, item_id, item_image_id) VALUES ('Translucent Blue', 29.99, 95, 10, 25);
