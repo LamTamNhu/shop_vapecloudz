@@ -41,14 +41,14 @@ public class ItemService implements IItemService {
     public void addToCartByUserEmail(CartAddDTO cartAddDTO) {
         UserCart userCart = userCartRepository.findByUserEntityEmailAndItemVariantId(cartAddDTO.getEmail(), cartAddDTO.getId()).orElse(null);
         if (userCart != null) {
-            userCart.setItemAmount(userCart.getItemAmount() + 1);
+            userCart.setAmount(userCart.getAmount() + 1);
         } else {
             UserEntity userEntity = userRepository.findByEmail(cartAddDTO.getEmail()).orElse(null);
             userCart = new UserCart();
             userCart.setUserEntity(userEntity);
             ItemVariant itemVariant = itemVariantRepository.findById(cartAddDTO.getId()).orElse(null);
             userCart.setItemVariant(itemVariant);
-            userCart.setItemAmount(1);
+            userCart.setAmount(1);
         }
         userCartRepository.save(userCart);
     }
@@ -67,5 +67,10 @@ public class ItemService implements IItemService {
         List<IItemVariantDTO> itemVariantDTOS = itemVariantRepository.findAllByItem_Id(id);
         itemDetailDTO.setItemVariantDTOS(itemVariantDTOS);
         return itemDetailDTO;
+    }
+
+    @Override
+    public List<IUserCartDTO> getCartByUserEmail(String email) {
+        return userCartRepository.findAllByUserEntityEmail(email);
     }
 }

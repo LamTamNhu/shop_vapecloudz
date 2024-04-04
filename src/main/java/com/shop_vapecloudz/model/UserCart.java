@@ -21,5 +21,5 @@ public class UserCart {
     @ManyToOne
     @JoinColumn(name = "item_variant_id", referencedColumnName = "id")
     private ItemVariant itemVariant;
-    private Integer itemAmount;
+    private Integer amount;
 }
