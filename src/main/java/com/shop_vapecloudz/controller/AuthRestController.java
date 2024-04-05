@@ -14,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,14 +39,21 @@ public class AuthRestController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDTO> login(@RequestBody UserDTO userDTO) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDTO.getEmail(), userDTO.getPassword()));
+        UserEntity user = authService.findByEmail(userDTO.getEmail());
+        if (user == null) {
+            throw new UsernameNotFoundException("Can't find any user with this email!");
+        }
+        if (user.getIsDeleted()) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), userDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtTokenHandler.generateToken(authentication);
         AuthResponseDTO authResponseDTO = new AuthResponseDTO();
         authResponseDTO.setAccessToken(token);
-        authResponseDTO.setUsername(userDTO.getUsername());
+        authResponseDTO.setUsername(user.getUsername());
         authResponseDTO.setRole(authentication.getAuthorities().toString());
-        authResponseDTO.setEmail(userDTO.getEmail());
+        authResponseDTO.setEmail(user.getEmail());
         return new ResponseEntity<>(authResponseDTO, HttpStatus.OK);
     }
 
@@ -61,8 +69,9 @@ public class AuthRestController {
     }
 
     @GetMapping("/duplicated")
-    public ResponseEntity<Boolean> checkEmailDuplicated(@RequestParam("email") String email) {
-        Boolean isDuplicated = authService.checkUserExistByEmail(email);
+    public ResponseEntity<Boolean> checkDuplicated(@RequestParam("email") String email,
+                                                   @RequestParam("username") String username) {
+        Boolean isDuplicated = authService.checkUserExist(username, email);
         return new ResponseEntity<>(isDuplicated, HttpStatus.OK);
     }
 }

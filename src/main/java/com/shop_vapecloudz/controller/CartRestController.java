@@ -30,6 +30,7 @@ public class CartRestController {
 
     @GetMapping("/{email}")
     public ResponseEntity<List<IUserCartDTO>> getCart(@PathVariable String email) {
+        System.out.println(email);
         List<IUserCartDTO> userCarts = itemService.getCartByUserEmail(email);
         return new ResponseEntity<>(userCarts, HttpStatus.OK);
     }

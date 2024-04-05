@@ -5,6 +5,8 @@ import com.shop_vapecloudz.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class AuthService implements IAuthService {
     private final UserRepository userRepository;
@@ -20,8 +22,11 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public boolean checkUserExistByEmail(String email) {
-        return userRepository.existsByEmail(email);
+    public boolean checkUserExist(String username, String email) {
+        if (Objects.equals(username, "")) {
+            return userRepository.existsByEmail(email);
+        }
+        return userRepository.existsByUsername(username);
     }
 
     @Override
