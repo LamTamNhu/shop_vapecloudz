@@ -16,6 +16,13 @@ public interface IUserCartDTO {
 
         ItemImageUrl getItemImage();
 
+        Item getItem();
+
+        interface Item {
+            String getName();
+            Long getId();
+        }
+
         interface ItemImageUrl {
             String getUrl();
         }

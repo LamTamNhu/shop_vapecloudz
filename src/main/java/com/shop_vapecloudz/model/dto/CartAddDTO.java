@@ -11,5 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CartAddDTO {
     private Long id;
+    private Integer amount;
     private String email;
 }
