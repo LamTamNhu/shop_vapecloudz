@@ -38,17 +38,17 @@ public class ItemService implements IItemService {
     }
 
     @Override
-    public void addToCartByUserEmail(CartAddDTO cartAddDTO) {
-        UserCart userCart = userCartRepository.findByUserEntityEmailAndItemVariantId(cartAddDTO.getEmail(), cartAddDTO.getId()).orElse(null);
+    public void addToCartByUserEmail(CartEditDTO cartEditDTO) {
+        UserCart userCart = userCartRepository.findByUserEntityEmailAndItemVariantId(cartEditDTO.getEmail(), cartEditDTO.getVariantId()).orElse(null);
         if (userCart != null) {
-            userCart.setAmount(userCart.getAmount() + cartAddDTO.getAmount());
+            userCart.setAmount(userCart.getAmount() + cartEditDTO.getAmount());
         } else {
-            UserEntity userEntity = userRepository.findByEmail(cartAddDTO.getEmail()).orElse(null);
+            UserEntity userEntity = userRepository.findByEmail(cartEditDTO.getEmail()).orElse(null);
             userCart = new UserCart();
             userCart.setUserEntity(userEntity);
-            ItemVariant itemVariant = itemVariantRepository.findById(cartAddDTO.getId()).orElse(null);
+            ItemVariant itemVariant = itemVariantRepository.findById(cartEditDTO.getVariantId()).orElse(null);
             userCart.setItemVariant(itemVariant);
-            userCart.setAmount(cartAddDTO.getAmount());
+            userCart.setAmount(cartEditDTO.getAmount());
         }
         userCartRepository.save(userCart);
     }
@@ -72,5 +72,19 @@ public class ItemService implements IItemService {
     @Override
     public List<IUserCartDTO> getCartByUserEmail(String email) {
         return userCartRepository.findAllByUserEntityEmail(email);
+    }
+
+    @Override
+    public void editCart(CartEditDTO cartEditDTO) {
+        UserCart userCart = userCartRepository.findById(cartEditDTO.getCartId()).orElse(null);
+        if (userCart == null) {
+            return;
+        }
+        if (cartEditDTO.getAmount() == 0) {
+            userCartRepository.delete(userCart);
+            return;
+        }
+        userCart.setAmount(cartEditDTO.getAmount());
+        userCartRepository.save(userCart);
     }
 }

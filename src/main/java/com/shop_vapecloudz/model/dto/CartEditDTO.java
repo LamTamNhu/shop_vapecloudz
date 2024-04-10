@@ -9,8 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartAddDTO {
-    private Long id;
+public class CartEditDTO {
+    private Long variantId;
+    private Long cartId;
     private Integer amount;
     private String email;
 }
