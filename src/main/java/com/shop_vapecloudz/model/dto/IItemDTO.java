@@ -12,4 +12,5 @@ public interface IItemDTO {
     String getDescription();
 
     String getUrl();
+    Double getPrice();
 }

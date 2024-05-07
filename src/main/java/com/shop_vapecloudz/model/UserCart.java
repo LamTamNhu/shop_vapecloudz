@@ -22,4 +22,6 @@ public class UserCart {
     @JoinColumn(name = "item_variant_id", referencedColumnName = "id")
     private ItemVariant itemVariant;
     private Integer amount;
+    @Column(columnDefinition = "boolean default 0")
+    private Boolean isPaid = false;
 }

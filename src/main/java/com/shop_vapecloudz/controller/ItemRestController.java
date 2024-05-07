@@ -31,6 +31,7 @@ public class ItemRestController {
                                                   @RequestParam(value = "brand_id", defaultValue = "") Long brandId,
                                                   @RequestParam(value = "category_id", defaultValue = "") Long categoryId,
                                                   @RequestParam(value = "name", defaultValue = "") String name) {
+        System.out.println(categoryId);
         Page<IItemDTO> iItemDTOS = itemService.findAll(pageable, brandId, categoryId, name);
         return new ResponseEntity<>(iItemDTOS, HttpStatus.OK);
     }

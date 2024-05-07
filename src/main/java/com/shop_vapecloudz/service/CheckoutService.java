@@ -35,7 +35,6 @@ public class CheckoutService implements ICheckoutService {
             order = response.result();
             System.out.println("Order ID: " + order.id());
             return order.id();
-//            order.links().forEach(link -> System.out.println(link.rel() + " => " + link.method() + ":" + link.href()));
         } catch (IOException ioe) {
             if (ioe instanceof HttpException he) {
                 // Something went wrong server-side
